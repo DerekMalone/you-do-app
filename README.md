@@ -17,6 +17,12 @@ Below are the steps to get setup, which you should already be very familiar with
 6. Review the [MVP wireframe](https://www.figma.com/file/4YVF79vgSfeSj0H1G9HYDy/YOU-DO-MVP)
 7. CODE!
 
+## IN CLASS
+- [Set up firebase](https://github.com/nss-evening-cohort-16/YOU-DO-react/pull/1/files)
+- [Add useEffect](https://github.com/nss-evening-cohort-16/YOU-DO-react/pull/2/files)
+- [Map Todos](https://github.com/nss-evening-cohort-16/YOU-DO-react/pull/3/files)
+- [Create a Todo Component](https://github.com/nss-evening-cohort-16/YOU-DO-react/pull/4/files)
+
 ## MVP Acceptance Criteria
 NOTE: **DO NOT** make style changes. Follow the wireframe as designed as it uses Bootstrap Components that will make your app development faster. If you are able to complete MVP, move on to the stretch goals.
 
