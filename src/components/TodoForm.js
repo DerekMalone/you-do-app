@@ -67,7 +67,7 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
             required
           />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit">{obj.firebaseKey ? 'Update' : 'Submit'}</button>
       </form>
     </>
   );
