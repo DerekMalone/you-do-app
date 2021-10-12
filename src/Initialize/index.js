@@ -5,10 +5,7 @@ import TodoForm from '../components/TodoForm';
 
 function Initialize() {
   const [todos, setTodos] = useState([]);
-
-  // useEffect(() => {
-  //   getTodos().then(setTodos);
-  // });
+  const [editItem, setEditItem] = useState({});
 
   useEffect(() => {
     getTodos().then(setTodos);
@@ -16,9 +13,14 @@ function Initialize() {
 
   return (
     <>
-      <TodoForm />
+      <TodoForm obj={editItem} setTodos={setTodos} setEditItem={setEditItem} />
       {todos.map((todo) => (
-        <Todo key={todo.name} todo={todo} />
+        <Todo
+          key={todo.firebaseKey}
+          todo={todo}
+          setTodos={setTodos}
+          setEditItem={setEditItem}
+        />
       ))}
     </>
   );
