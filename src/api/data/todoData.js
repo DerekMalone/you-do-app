@@ -24,4 +24,31 @@ const createTodo = (obj) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getTodos, createTodo };
+const deleteTodo = (firebaseKey) => new Promise((resolve, reject) => {
+  axios
+    .delete(`${dbUrl}/todo/${firebaseKey}.json`)
+    .then(() => getTodos().then(resolve))
+    .catch(reject);
+});
+
+// Second way to write updateTodo if only using to update one item.
+// const updateTodo = (firebaseKey, newState) => new Promise((resolve, reject) => {
+//   axios.patch(`${dbUrl}/todo/${firebaseKey}.json`, newState)
+//     .then(() => {
+//       getTodos().then(resolve);
+//     })
+//     .catch(reject);
+// });
+
+const updateTodo = (todoObj) => new Promise((resolve, reject) => {
+  axios
+    .patch(`${dbUrl}/todo/${todoObj.firebaseKey}.json`, todoObj)
+    .then(() => {
+      getTodos().then(resolve);
+    })
+    .catch(reject);
+});
+
+export {
+  getTodos, createTodo, deleteTodo, updateTodo,
+};

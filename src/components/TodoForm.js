@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { createTodo } from '../api/data/todoData';
+import { useEffect } from 'react/cjs/react.development';
+import { createTodo, updateTodo } from '../api/data/todoData';
 
-export default function TodoForm({ obj }) {
-  const [formInput, setFormInput] = useState({
-    name: obj?.name || '',
-    id: obj?.id || '',
-  });
+const initialState = {
+  name: '',
+  complete: false,
+  uid: '',
+};
+
+export default function TodoForm({ obj, setTodos, setEditItem }) {
+  const [formInput, setFormInput] = useState(initialState);
 
   const handleChange = (e) => {
     setFormInput((prevState) => ({
@@ -15,9 +19,39 @@ export default function TodoForm({ obj }) {
     }));
   };
 
+  useEffect(() => {
+    if (obj.firebaseKey) {
+      setFormInput({
+        name: obj.name,
+        firebaseKey: obj.firebaseKey,
+        complete: obj.complete,
+        date: obj.date,
+        uid: obj.uid,
+      });
+    }
+  }, [obj]);
+
+  const resetForm = () => {
+    setFormInput({ ...initialState });
+    setEditItem({});
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    createTodo(formInput);
+    if (obj.firebaseKey) {
+      // updates the todo
+      updateTodo(formInput).then((todos) => {
+        setTodos(todos);
+        resetForm();
+      });
+    } else {
+      createTodo({ ...formInput, date: new Date() }).then((todos) => {
+        // update the DOM with the new todo
+        setTodos(todos);
+        // reset the form
+        resetForm();
+      });
+    }
   };
 
   return (
@@ -43,7 +77,13 @@ TodoForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     id: PropTypes.string,
+    firebaseKey: PropTypes.string,
+    complete: PropTypes.bool,
+    date: PropTypes.string,
+    uid: PropTypes.string,
   }),
+  setTodos: PropTypes.func.isRequired,
+  setEditItem: PropTypes.func.isRequired,
 };
 
 TodoForm.defaultProps = { obj: {} };
