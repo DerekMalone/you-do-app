@@ -8,6 +8,7 @@ const initialState = {
   name: '',
   complete: false,
   uid: '',
+  // catagory: PropTypes.string,
 };
 
 const FormStyle = styled.form`
@@ -20,8 +21,6 @@ const FormStyle = styled.form`
     border-radius: 5px;
   }
 `;
-
-const Button = styled.button``;
 
 export default function TodoForm({ obj, setTodos, setEditItem }) {
   const [formInput, setFormInput] = useState(initialState);
@@ -41,6 +40,7 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
         complete: obj.complete,
         date: obj.date,
         uid: obj.uid,
+        // catagory: PropTypes.string,
       });
     }
   }, [obj]);
@@ -81,9 +81,10 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
             required
           />
         </label>
-        <Button type="submit" className="btn btn-success">
+        {/* Need to put in a select (boostrap) here - decomment three locations that catagory was added. */}
+        <button type="submit" className="btn btn-success">
           {obj.firebaseKey ? 'Update' : 'Submit'}
-        </Button>
+        </button>
       </FormStyle>
     </>
   );
@@ -97,6 +98,7 @@ TodoForm.propTypes = {
     complete: PropTypes.bool,
     date: PropTypes.string,
     uid: PropTypes.string,
+    // catagory: PropTypes.string,
   }),
   setTodos: PropTypes.func.isRequired,
   setEditItem: PropTypes.func.isRequired,
