@@ -56,13 +56,17 @@ export default function Todo({ todo, setTodos, setEditItem }) {
         <h5>{todo.name}</h5>
 
         <Div>
-          <button
-            onClick={() => setEditItem(todo)}
-            type="button"
-            className="btn btn-info"
-          >
-            EDIT
-          </button>
+          {todo.complete ? (
+            ''
+          ) : (
+            <button
+              onClick={() => setEditItem(todo)}
+              type="button"
+              className="btn btn-info"
+            >
+              EDIT
+            </button>
+          )}
 
           <button
             onClick={() => handleClick('delete')}
