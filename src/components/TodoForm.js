@@ -8,7 +8,7 @@ const initialState = {
   name: '',
   complete: false,
   uid: '',
-  // catagory: PropTypes.string,
+  catagory: '',
 };
 
 const FormStyle = styled.form`
@@ -24,6 +24,7 @@ const FormStyle = styled.form`
 
 export default function TodoForm({ obj, setTodos, setEditItem }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [selectorInput, setSelectorInput] = useState(initialState);
 
   const handleChange = (e) => {
     setFormInput((prevState) => ({
@@ -40,13 +41,14 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
         complete: obj.complete,
         date: obj.date,
         uid: obj.uid,
-        // catagory: PropTypes.string,
+        catagory: selectorInput,
       });
     }
   }, [obj]);
 
   const resetForm = () => {
     setFormInput({ ...initialState });
+    setSelectorInput({ ...initialState });
     setEditItem({});
   };
 
@@ -81,7 +83,18 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
             required
           />
         </label>
-        {/* Need to put in a select (boostrap) here - decomment three locations that catagory was added. */}
+        {
+          <select
+            value={setSelectorInput}
+            className="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        }{' '}
         <button type="submit" className="btn btn-success">
           {obj.firebaseKey ? 'Update' : 'Submit'}
         </button>
@@ -98,7 +111,7 @@ TodoForm.propTypes = {
     complete: PropTypes.bool,
     date: PropTypes.string,
     uid: PropTypes.string,
-    // catagory: PropTypes.string,
+    catagory: PropTypes.string,
   }),
   setTodos: PropTypes.func.isRequired,
   setEditItem: PropTypes.func.isRequired,
