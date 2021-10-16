@@ -26,6 +26,8 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
   const [formInput, setFormInput] = useState(initialState);
   const [selectorInput, setSelectorInput] = useState(initialState);
 
+  console.warn(selectorInput);
+
   const handleChange = (e) => {
     setFormInput((prevState) => ({
       ...prevState,
@@ -41,7 +43,7 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
         complete: obj.complete,
         date: obj.date,
         uid: obj.uid,
-        catagory: selectorInput,
+        catagory: obj.catagory,
       });
     }
   }, [obj]);
@@ -89,7 +91,7 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
             className="form-select"
             aria-label="Default select example"
           >
-            <option selected>Open this select menu</option>
+            <option selected>Catagory</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
