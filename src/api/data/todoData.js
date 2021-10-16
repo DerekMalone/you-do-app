@@ -3,6 +3,13 @@ import firebaseConfig from '../apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL;
 
+const getAllTodos = () => new Promise((resolve, reject) => {
+  axios
+    .get(`${dbUrl}/todo.json`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch(reject);
+});
+
 const getTodos = (value) => new Promise((resolve, reject) => {
   axios
     .get(`${dbUrl}/todo.json?orderBy="complete"&equalTo=${value}`)
@@ -69,4 +76,5 @@ export {
   updateTodo,
   getCompletedTodos,
   deleteCompletedTodo,
+  getAllTodos,
 };
