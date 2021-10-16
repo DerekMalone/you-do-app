@@ -8,6 +8,7 @@ const initialState = {
   name: '',
   complete: false,
   uid: '',
+  catagory: '',
 };
 
 const FormStyle = styled.form`
@@ -21,15 +22,17 @@ const FormStyle = styled.form`
   }
 `;
 
-const Button = styled.button``;
-
 export default function TodoForm({ obj, setTodos, setEditItem }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [selectorInput, setSelectorInput] = useState(initialState);
+
+  console.warn(selectorInput);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormInput((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
@@ -41,12 +44,14 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
         complete: obj.complete,
         date: obj.date,
         uid: obj.uid,
+        catagory: obj.catagory,
       });
     }
   }, [obj]);
 
   const resetForm = () => {
     setFormInput({ ...initialState });
+    setSelectorInput({ ...initialState });
     setEditItem({});
   };
 
@@ -81,9 +86,21 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
             required
           />
         </label>
-        <Button type="submit" className="btn btn-success">
+        {
+          <select
+            value={setSelectorInput}
+            className="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Catagory</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        }{' '}
+        <button type="submit" className="btn btn-success">
           {obj.firebaseKey ? 'Update' : 'Submit'}
-        </Button>
+        </button>
       </FormStyle>
     </>
   );
@@ -97,6 +114,7 @@ TodoForm.propTypes = {
     complete: PropTypes.bool,
     date: PropTypes.string,
     uid: PropTypes.string,
+    catagory: PropTypes.string,
   }),
   setTodos: PropTypes.func.isRequired,
   setEditItem: PropTypes.func.isRequired,
