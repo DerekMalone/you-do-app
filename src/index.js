@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/index.scss';
 import firebase from 'firebase/app'; // Important element that must be added.
 import firebaseConfig from './api/apiKeys'; // Important element that must be added.
@@ -12,7 +13,9 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Initialize />
+    <Router>
+      <Initialize />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 );
