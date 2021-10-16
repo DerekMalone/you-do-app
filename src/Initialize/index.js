@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getTodos } from '../api/data/todoData';
 import Navigation from '../components/Navigation';
-import Todo from '../components/Todo';
 import TodoForm from '../components/TodoForm';
+import Routes from '../routes';
 
-const H1 = styled.h1`
-  display: flex;
-  justify-content: center;
-  color: white;
-  margin: 50px;
+const Container = styled.div`
+  width: 60%;
+  margin: 25px 20%;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin: 50px;
+  }
 `;
 
 function Initialize() {
@@ -17,23 +22,16 @@ function Initialize() {
   const [editItem, setEditItem] = useState({});
 
   useEffect(() => {
-    getTodos().then(setTodos);
+    getTodos(false).then(setTodos);
   }, []);
 
   return (
-    <>
+    <Container>
       <Navigation />
-      <H1>You - DO</H1>
+      <h1>You - DO</h1>
       <TodoForm obj={editItem} setTodos={setTodos} setEditItem={setEditItem} />
-      {todos.map((todo) => (
-        <Todo
-          key={todo.firebaseKey}
-          todo={todo}
-          setTodos={setTodos}
-          setEditItem={setEditItem}
-        />
-      ))}
-    </>
+      <Routes todos={todos} setTodos={setTodos} setEditItem={setEditItem} />
+    </Container>
   );
 }
 

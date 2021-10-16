@@ -9,7 +9,7 @@ export default function Navigation() {
     <div className="text-center mb-3">
       <ButtonGroup size="lg">
         <button
-          onClick={() => history.push('/')}
+          onClick={() => history.push('/home')}
           type="button"
           className="btn btn-light border border-dark"
         >

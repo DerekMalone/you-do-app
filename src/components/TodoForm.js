@@ -24,9 +24,6 @@ const FormStyle = styled.form`
 
 export default function TodoForm({ obj, setTodos, setEditItem }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [selectorInput, setSelectorInput] = useState(initialState);
-
-  console.warn(selectorInput);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,7 +48,6 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
 
   const resetForm = () => {
     setFormInput({ ...initialState });
-    setSelectorInput({ ...initialState });
     setEditItem({});
   };
 
@@ -86,18 +82,6 @@ export default function TodoForm({ obj, setTodos, setEditItem }) {
             required
           />
         </label>
-        {
-          <select
-            value={setSelectorInput}
-            className="form-select"
-            aria-label="Default select example"
-          >
-            <option selected>Catagory</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        }{' '}
         <button type="submit" className="btn btn-success">
           {obj.firebaseKey ? 'Update' : 'Submit'}
         </button>
