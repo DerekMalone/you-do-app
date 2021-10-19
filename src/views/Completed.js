@@ -22,7 +22,13 @@ export default function Completed() {
   const [completedTodos, setCompletedTodos] = useState([]);
 
   useEffect(() => {
-    getCompletedTodos().then(setCompletedTodos);
+    let isMounted = true;
+    getCompletedTodos().then((todoArray) => {
+      if (isMounted) setCompletedTodos(todoArray);
+    });
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleClick = (key) => {
