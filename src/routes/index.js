@@ -16,7 +16,7 @@ export default function Routes({ todos, setTodos, setEditItem }) {
             <Home todos={todos} setTodos={setTodos} setEditItem={setEditItem} />
           )}
         />
-        <Route exact path="/completed" component={Completed} />
+        <Route exact path="/completed" component={() => <Completed />} />
         <Route
           exact
           path="/all"
