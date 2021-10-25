@@ -14,7 +14,7 @@ mes/prototype
 Link to your project board (yes...even though it is a part of the repo)
 
 ## User
-Description of the user
+User is an individual who would like to be able to make a list of "to-do's" and mark them as completed while also being able to retain completed "to-do's" until they desire to delete them.
 
 ## Features
 List of features
